@@ -10,4 +10,4 @@ A memory game of finding matching pairs of cards.
 [Link to the project management board](https://github.com/orgs/DevLearnCollective/projects/1/views/1)
 
 ## Domain Model
-[Domain Model](https://github.com/DevLearnCollective/MemorySnap/blob/staging/Domain%20Model.png)
+![Domain Model](https://github.com/DevLearnCollective/MemorySnap/blob/staging/Domain%20Model.png)
