@@ -1,5 +1,74 @@
+body {
+  background-color: rgb(123, 202, 162);
+}
+
 header {
-border: 1px solid red;
-display: flex;
-justify-content: center;
+  /* border: 1px solid red; */
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
+}
+
+#title {
+  border: 1rem double rgb(26, 126, 75);
+  background-color: rgb(175, 228, 201);
+  border-radius: 1rem;
+  text-align: center;
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#title h1 {
+  margin: 0;
+  font-size: 5rem; 
+  font-family: "Comic Sans MS", sans-serif;
+}
+
+#title h3 {
+  margin: 0;
+  margin-top: 1.5rem;
+  font-size: 1.5rem;
+  font-family: "Comic Sans MS", sans-serif;
+}
+
+main {
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#playerForm {
+  border: .5rem solid rgb(50, 104, 136);
+  border-radius: 2rem;
+  background-color: rgb(174, 204, 222);
+  margin-top: 3rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 1vh;
+  height: 5vh;
+  width: 50vw;
+  font-size: 2rem;
+}
+
+#existingPlayers {
+  border: 1px solid red;
+  background-color: rgb(175, 228, 201);
+  height: 60vh;
+  width: 80vw; /* Adjust the width as needed */
+  max-width: 100%; /* Ensures it doesn't exceed the width of the parent */
+  margin-top: 2rem; /* Optional margin */
+}
+
+#copyright {
+  height: 5vh;
+  margin-top: 1vh;
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
