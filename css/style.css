@@ -60,9 +60,9 @@ main {
   border: 1px solid red;
   background-color: rgb(175, 228, 201);
   height: 60vh;
-  width: 80vw; /* Adjust the width as needed */
-  max-width: 100%; /* Ensures it doesn't exceed the width of the parent */
-  margin-top: 2rem; /* Optional margin */
+  width: 80vw; 
+  max-width: 100%; 
+  margin-top: 2rem; 
 }
 
 #copyright {
