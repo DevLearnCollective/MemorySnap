@@ -40,3 +40,43 @@ class Card {
     card.parentNode.removeChild(card);
   }
 }
+
+function createUser() {
+  const usernameInput = document.getElementById('createUsername');
+  const selectedImage = document.getElementById('selectImage');
+
+  const username = usernameInput.value.trim();
+  const image = selectedImage.value;
+
+  if (!username) {
+    alert('Please enter a username');
+    return;
+  }
+
+  const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+
+  // Check if username already exists
+  const userExists = existingUsers.some(user => user.username === username);
+  if (userExists) {
+    alert('Username already exists');
+    return;
+  }
+
+  const newUser = { username, image };
+  saveUser(newUser);
+  clearPlayerForm();
+}
+
+function saveUser(user) {
+  const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+  existingUsers.push(user);
+  localStorage.setItem('users', JSON.stringify(existingUsers));
+}
+
+function clearPlayerForm() {
+  document.getElementById('createUsername').value = '';
+  document.getElementById('selectImage').value = '';
+}
+
+// Event listener for the button click (optional if using onclick in HTML)
+document.querySelector('#playerForm button[type="submit"]').addEventListener('click', createUser);
