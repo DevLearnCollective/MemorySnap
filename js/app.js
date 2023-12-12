@@ -1,6 +1,17 @@
 // Global Variables
 let gameScore = 0;
 
+// User Class
+class User {
+  static currentUser = null;
+  constructor (username, image, scores) {
+    this.username = username;
+    this.image = image;
+    this.scores = scores;
+    User.currentUser = this;
+  }
+}
+
 // Card Class
 class Card {
   constructor (id, color, position) {
@@ -41,9 +52,16 @@ class Card {
   }
 }
 
-// app.js
-
-document.getElementById('submitButton').addEventListener('click', createUser);
+function doesUsernameExist(username) {
+  const storedUsers = JSON.parse(localStorage.getItem('users'));
+  
+  for (const user of storedUsers) {
+    if (user.username === username) {
+      return true; // Username exists in the stored data
+    }
+  }
+  return false; // Username does not exist in the stored data
+}
 
 function createUser() {
   const usernameInput = document.getElementById('createUsername');
@@ -53,15 +71,14 @@ function createUser() {
   const image = selectedImage.value;
 
   // Check if username exists in localStorage
-  if (localStorage.getItem(username)) {
+  if (localStorage.getItem('users') && doesUsernameExist(username)) {
+
     displayAlert('Username already exists! Please choose another.');
-    return; // Exit if username exists
+
   } else {
+
     // Create a new user object
-    const userObject = {
-      username,
-      image,
-    };
+    const userObject = new User(username, image, []);
 
     // Call saveUser function
     saveUser(userObject);
@@ -71,27 +88,29 @@ function createUser() {
   }
 }
 
-// // Function to display the alert message
-// function displayAlert(message) {
-//   const alertText = document.getElementById('alertText');
-//   alertText.textContent = message;
+// Function to display the alert message
+function displayAlert(message) {
+  const alertText = document.getElementById('alertText');
+  alertText.textContent = message;
 
-//   const alertMessage = document.getElementById('alertMessage');
-//   alertMessage.style.display = 'block';
+  const alertMessage = document.getElementById('alertMessage');
+  alertMessage.style.display = 'block';
 
-//   // Optionally, hide the alert after a few seconds
-//   setTimeout(() => {
-//     alertMessage.style.display = 'none';
-//   }, 3000); // Hide after 3 seconds (adjust as needed)
-// }
+  // Hide the alert after a few seconds
+  setTimeout(() => {
+    alertMessage.style.display = 'none';
+  }, 3000); // Hide after 3 seconds
+}
 
 function saveUser(user) {
-  // Step 3: Parse localStorage to a variable
+  // Parse localStorage to a variable
   let users = JSON.parse(localStorage.getItem('users')) || [];
 
-  // Step 3: Push the new user to the variable
+  // Push the new user to the variable
   users.push(user);
 
-  // Step 3: Save the variable back to localStorage
+  // Save the variable back to localStorage
   localStorage.setItem('users', JSON.stringify(users));
 }
+
+document.getElementById('submitButton').addEventListener('click', createUser);
