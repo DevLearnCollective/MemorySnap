@@ -41,42 +41,57 @@ class Card {
   }
 }
 
+// app.js
+
+document.getElementById('submitButton').addEventListener('click', createUser);
+
 function createUser() {
   const usernameInput = document.getElementById('createUsername');
-  const selectedImage = document.getElementById('selectImage');
-
   const username = usernameInput.value.trim();
+
+  const selectedImage = document.getElementById('selectImage');
   const image = selectedImage.value;
 
-  if (!username) {
-    alert('Please enter a username');
-    return;
+  // Check if username exists in localStorage
+  if (localStorage.getItem(username)) {
+    displayAlert('Username already exists! Please choose another.');
+    return; // Exit if username exists
+  } else {
+    // Create a new user object
+    const userObject = {
+      username,
+      image,
+    };
+
+    // Call saveUser function
+    saveUser(userObject);
+
+    // Clear pre-game view
+    document.getElementById('playerForm').style.display = 'none';
   }
-
-  const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
-
-  // Check if username already exists
-  const userExists = existingUsers.some(user => user.username === username);
-  if (userExists) {
-    alert('Username already exists');
-    return;
-  }
-
-  const newUser = { username, image };
-  saveUser(newUser);
-  clearPlayerForm();
 }
+
+// // Function to display the alert message
+// function displayAlert(message) {
+//   const alertText = document.getElementById('alertText');
+//   alertText.textContent = message;
+
+//   const alertMessage = document.getElementById('alertMessage');
+//   alertMessage.style.display = 'block';
+
+//   // Optionally, hide the alert after a few seconds
+//   setTimeout(() => {
+//     alertMessage.style.display = 'none';
+//   }, 3000); // Hide after 3 seconds (adjust as needed)
+// }
 
 function saveUser(user) {
-  const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
-  existingUsers.push(user);
-  localStorage.setItem('users', JSON.stringify(existingUsers));
-}
+  // Step 3: Parse localStorage to a variable
+  let users = JSON.parse(localStorage.getItem('users')) || [];
 
-function clearPlayerForm() {
-  document.getElementById('createUsername').value = '';
-  document.getElementById('selectImage').value = '';
-}
+  // Step 3: Push the new user to the variable
+  users.push(user);
 
-// Event listener for the button click (optional if using onclick in HTML)
-document.querySelector('#playerForm button[type="submit"]').addEventListener('click', createUser);
+  // Step 3: Save the variable back to localStorage
+  localStorage.setItem('users', JSON.stringify(users));
+}

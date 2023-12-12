@@ -34,8 +34,11 @@
         <option value="/img/sailboat.png">Sailboat</option>
         <option value="/img/scissors.png">Scissors</option>
       </select>
-      <button type="submit" onclick="createUser()">Submit</button>
+      <button type="button" id="submitButton">Submit</button>
     </section>
+    <div id="alertMessage" style="display: none;">
+      <p id="alertText"></p>
+    </div>
     <section id="existingPlayers"></section>
   </main>
   <footer>
