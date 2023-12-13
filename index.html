@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Memory Snap</title>
   <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/reset.css">
 </head>
 <body>
   <header>
     <div id="title">
       <h1>Memory Snap</h1>
-      <h3>Snap snap!</h3>
+      <h3>(Snap snap!)</h3>
     </div>
   </header>
   <main>
@@ -33,9 +34,15 @@
         <option value="/img/sailboat.png">Sailboat</option>
         <option value="/img/scissors.png">Scissors</option>
       </select>
-      <button type="submit">Submit</button>
+      <button type="button" id="submitButton">Submit</button>
+      <div id="alertMessage" style="display: none;">
+        <p id="alertText"></p>
+      </div>
     </section>
-    <section id="existerPlayers"></section>
+    <p>Existing Players</p>
+    <section id="existingPlayers">
+
+    </section>
   </main>
   <footer>
     <div id="copyright">
