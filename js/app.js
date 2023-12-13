@@ -117,6 +117,7 @@ function generateCards() {
 }
 
 //generateCards();
+
 function doesUsernameExist(username) {
   const storedUsers = JSON.parse(localStorage.getItem('users'));
   
