@@ -78,25 +78,31 @@ function generateCards() {
   let secondRow = document.createElement('section');
   secondRow.classList.add('cardRow');
 
+  document.querySelector('main').appendChild(firstRow);
+  document.querySelector('main').appendChild(secondRow);
+
   // Display Cards to player
   for (let y = 1; y <= 2; y++) { // Cycle through rows
     for (let x = 1; x <= 4; x++) { // Cycle through columns
-      if (y === 1) {
+      if (y === 1) { // Populate first row
         let card = Card.cards.find(obj => obj.position[0] === y && obj.position[1] === x);
         let cardElement = document.createElement('div');
         cardElement.id = card.id;
         cardElement.classList.add('card');
-        //TODO: Add card to firstRow
-      } else {
+        cardElement.innerText = card.color;
+        cardElement.style.backgroundColor = '#' + card.color;
+        firstRow.appendChild(cardElement);
+      } else { // Populate second row
         let card = Card.cards.find(obj => obj.position[0] === y && obj.position[1] === x);
         let cardElement = document.createElement('div');
         cardElement.id = card.id;
         cardElement.classList.add('card');
-        //TODO: Add card to secondRow
+        cardElement.innerText = card.color;
+        cardElement.style.backgroundColor = '#' + card.color;
+        secondRow.appendChild(cardElement);
       }
     }
   }
 }
 
-document.querySelector('main').innerHTML = '';
-generateCards();
+//generateCards();
