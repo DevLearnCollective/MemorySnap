@@ -114,3 +114,29 @@ function saveUser(user) {
 }
 
 document.getElementById('submitButton').addEventListener('click', createUser);
+
+// Check Local Storage for Data
+if (localStorage.getItem('users')) {
+  // Retrieve and Parse Data
+  const storedUsers = JSON.parse(localStorage.getItem('users'));
+
+  // Display Usernames
+  const existingPlayersSection = document.getElementById('existingPlayers');
+  existingPlayersSection.innerHTML = ''; // Clear existing content
+
+  storedUsers.forEach(user => {
+    const usernameElement = document.createElement('p');
+    usernameElement.textContent = user.username;
+    usernameElement.addEventListener('click', () => {
+      // Create a new CurrentUser object
+      const currentUser = new CurrentUser(user.username, /* Other necessary parameters */);
+
+      // Navigate to the game board or perform other actions
+      // For example: window.location.href = 'game.html';
+    });
+    existingPlayersSection.appendChild(usernameElement);
+  });
+} else {
+  // No data in local storage, do nothing or display a message
+  console.log('No data found in local storage.');
+}
