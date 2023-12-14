@@ -91,6 +91,30 @@ main {
   background-color: rgb(26, 126, 75);
 }
 
+#alertMessage {
+  position: fixed; /* Fixed position for the alert box */
+  top: 50%; /* Adjust the top position */
+  left: 50%; /* Adjust the left position */
+  transform: translate(-50%, -50%); /* Center the alert box */
+  z-index: 9999; /* Ensure the alert box is on top of other content */
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+  padding: 5%; /* Adjust padding as needed */
+  border-radius: 1em; /* Add rounded corners */
+  box-shadow: 0 0 100px rgba(0, 0, 0, 0.6); /* Add a subtle shadow */
+}
+
+/* Style for the alert text */
+#alertText {
+  font-size: 34px;
+  color: black;
+  font-family: Arial, sans-serif;
+}
+
+/* Display the overlay when alert is active */
+.alert-active .overlay {
+  display: block;
+}
+
 #existingPlayers {
   border: 2px solid rgb(26, 126, 75);
   align-self: flex-start;

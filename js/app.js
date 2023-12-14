@@ -136,6 +136,25 @@ function doesUsernameExist(username) {
   return false; // Username does not exist in the stored data
 }
 
+function displayAlert(message) {
+  const alertText = document.getElementById('alertText');
+  alertText.textContent = message;
+
+  const alertMessage = document.getElementById('alertMessage');
+  alertMessage.classList.add('alert-active');
+
+  const overlay = document.querySelector('.overlay');
+  overlay.classList.add('alert-active');
+}
+
+function hideAlert() {
+  const alertMessage = document.getElementById('alertMessage');
+  alertMessage.classList.remove('alert-active');
+
+  const overlay = document.querySelector('.overlay');
+  overlay.classList.remove('alert-active');
+}
+
 function createUser() {
   const usernameInput = document.getElementById('createUsername');
   const username = usernameInput.value.trim();
