@@ -159,6 +159,54 @@ main {
   }
 }
 
+.cardRow {
+  width: 100vw;
+  height: 25vh;
+  margin-top: 10vh;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.card {
+  width: 20vh;
+  border-radius: 10px;
+  border-color: white;
+  border-width: 5px;
+  border-style: solid;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.5s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-2vh);
+}
+
+.flippedDown {
+  background-color: #2f2f2f;
+}
+
+.flippedDown div {
+  width: 200px;
+  height: 100px;
+  background: white;
+  border-radius: 100px / 50px;
+  transform: rotate(-0.15turn);
+  
+  position: relative;
+  top: 6.25vh;
+  left: -1.5vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 5vh; 
+  font-style: italic;
+  font-weight: 900;
+  font-family: "Comic Sans MS", sans-serif;
+  color: #ff0000;
+}
+
 #copyright {
   height: 5vh;
   margin-top: 1.5vh;
