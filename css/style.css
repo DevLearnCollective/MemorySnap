@@ -3,8 +3,6 @@ body {
 }
 
 header {
-  /* border: 1px solid red; */
-  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,11 +10,11 @@ header {
 }
 
 #title {
-  border: 1rem double rgb(26, 126, 75);
+  border: 2vh double rgb(26, 126, 75);
   background-color: rgb(175, 228, 201);
-  border-radius: 1rem;
+  border-radius: 2vh;
   text-align: center;
-  height: 20vh;
+  height: 18vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,15 +22,30 @@ header {
 
 #title h1 {
   margin: 0;
-  font-size: 5rem; 
+  font-size: 10vh; 
+  font-style: italic;
+  font-weight: 900;
   font-family: "Comic Sans MS", sans-serif;
+  color: white;
+  text-shadow: 
+    1px 1px 15px rgba(26, 126, 75), /* Main shadow */
+    1px 1px 1px rgba(26, 126, 75), /* Top-left shadow */
+    1px 1px 1px rgba(26, 126, 75), /* Top-right shadow */
+    1px 1px 1px rgba(26, 126, 75); /* Bottom-left shadow */
 }
 
 #title h3 {
   margin: 0;
-  margin-top: 1.5rem;
-  font-size: 1.5rem;
+  margin-top: 2.5vh;
+  font-size: 3vh;
+  font-weight: 200;
   font-family: "Comic Sans MS", sans-serif;
+  color: white;
+  text-shadow: 
+    1px 1px 5px rgba(26, 126, 75), /* Main shadow */
+    1px 1px 5px rgba(26, 126, 75), /* Top-left shadow */
+    1px 1px 5px rgba(26, 126, 75), /* Top-right shadow */
+    1px 1px 1px rgba(26, 126, 75); /* Bottom-left shadow */
 }
 
 main {
@@ -43,31 +56,112 @@ main {
 }
 
 #playerForm {
-  border: .5rem solid rgb(50, 104, 136);
-  border-radius: 2rem;
+  border: 1vh solid rgb(50, 104, 136);
+  border-radius: 3vh;
   background-color: rgb(174, 204, 222);
-  margin-top: 3rem;
+  margin-top: 4vh;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   padding: 1vh;
   height: 5vh;
   width: 50vw;
-  font-size: 2rem;
+  max-width: 100%;
+  color: white;
+  text-shadow: 
+  1px 1px 10px rgba(50, 104, 136), /* Main shadow */
+  1px 1px 1px rgba(50, 104, 136), /* Top-left shadow */
+  1px 1px 1px rgba(50, 104, 136), /* Top-right shadow */
+  0px 0px 0px rgba(50, 104, 136); /* Bottom-left shadow */
+  font-size: 3vh;
+  font-family: "Comic Sans MS", sans-serif;
+}
+
+#submitButton {
+  padding: .75vh 3vh;
+  font-size: 2.5vh;
+  background-color: rgb(50, 104, 136); 
+  color: white;
+  border: none;
+  border-radius: 2vh;
+  cursor: pointer;
+}
+
+#submitButton:hover {
+  background-color: rgb(26, 126, 75);
 }
 
 #existingPlayers {
-  border: 1px solid red;
+  border: 2px solid rgb(26, 126, 75);
+  align-self: flex-start;
+  margin-left: 9.5vw;
+  margin-top: 1vh; 
+  margin-bottom: -4.5vh;
+  padding: 1vh;
+  background-color: rgb(175, 228, 201);
+  font-size: 2.5vh;
+  font-family: "Comic Sans MS", sans-serif;
+  color: white;
+  text-shadow: 
+  1px 1px 5px rgba(26, 126, 75), /* Main shadow */
+  1px 1px 5px rgba(26, 126, 75), /* Top-left shadow */
+  1px 1px 5px rgba(26, 126, 75), /* Top-right shadow */
+  0px 0px 0px rgba(26, 126, 75); /* Bottom-left shadow */
+}
+
+#existingPlayersContainer {
+  border: 2px solid rgb(26, 126, 75);
+  display: flex;
+  flex-wrap: wrap;
   background-color: rgb(175, 228, 201);
   height: 60vh;
   width: 80vw; 
   max-width: 100%; 
-  margin-top: 2rem; 
+  margin-top: 4vh; 
+  overflow: auto;
+}
+
+#existingPlayersContainer p {
+  text-align: center;
+  margin-top: 3vh;
+  font-size: 3vh;
+  font-family: "Comic Sans MS", sans-serif;
+  color: white;
+  text-shadow: 
+  0px 0px 5px rgba(26, 126, 75), /* Main shadow */
+  1px 1px 5px rgba(26, 126, 75), /* Top-left shadow */
+  1px 1px 5px rgba(26, 126, 75), /* Top-right shadow */
+  0px 0px 0px rgba(26, 126, 75); /* Bottom-left shadow */
+}
+
+#existingPlayersContainer img {
+  width: 15vw; 
+  height: 25vh; 
+  margin: 3vh;
+  margin-left: 3vw;
+  text-align: center;
+  object-fit: cover;
+  border-radius: 5vh;
+  transition: transform 0.3s ease; 
+}
+
+#existingPlayersContainer img:hover {
+  transform: translateY(-10px); 
+  animation: bounce .6s ease infinite; 
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0); 
+  }
+  50% {
+    transform: translateY(-10px); 
+  }
 }
 
 #copyright {
   height: 5vh;
-  margin-top: 1vh;
+  margin-top: 1.5vh;
   display: flex;
   justify-content: center;
   align-content: center;

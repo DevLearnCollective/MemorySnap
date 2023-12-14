@@ -187,20 +187,26 @@ if (localStorage.getItem('users')) {
   const storedUsers = JSON.parse(localStorage.getItem('users'));
 
   // Display Usernames
-  const existingPlayersSection = document.getElementById('existingPlayers');
+  const existingPlayersSection = document.getElementById('existingPlayersContainer');
   existingPlayersSection.innerHTML = ''; // Clear existing content
 
   storedUsers.forEach(user => {
+    const userContainer = document.createElement('div');
+  
     const usernameElement = document.createElement('p');
     usernameElement.textContent = user.username;
-    usernameElement.addEventListener('click', () => {
+    userContainer.appendChild(usernameElement); // Username displayed above image
+    
+    const userImageElement = document.createElement('img');
+    userImageElement.src = user.image;
+    userImageElement.alt = user.image.substring(5);
+    userImageElement.alt = userImageElement.alt.substring(0, userImageElement.alt.length - 4);
+    userContainer.appendChild(userImageElement); // Image displayed below username
+    userContainer.addEventListener('click', () => {
       // Create a new CurrentUser object
-      const currentUser = new CurrentUser(user.username, /* Other necessary parameters */);
-
-      // Navigate to the game board or perform other actions
-      // For example: window.location.href = 'game.html';
+      const currentUser = new User(user.username, user.image);
     });
-    existingPlayersSection.appendChild(usernameElement);
+    existingPlayersSection.appendChild(userContainer);
   });
 } else {
   // No data in local storage, do nothing or display a message
