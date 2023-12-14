@@ -100,23 +100,30 @@ function generateCards() {
         let cardElement = document.createElement('div');
         cardElement.id = card.id;
         cardElement.classList.add('card');
-        cardElement.innerText = card.color;
-        cardElement.style.backgroundColor = '#' + card.color;
+        cardElement.appendChild(document.createElement('div')).innerText = 'SNAP!';
+        cardElement.classList.add('flippedDown');
         firstRow.appendChild(cardElement);
       } else { // Populate second row
         let card = Card.cards.find(obj => obj.position[0] === y && obj.position[1] === x);
         let cardElement = document.createElement('div');
         cardElement.id = card.id;
         cardElement.classList.add('card');
-        cardElement.innerText = card.color;
-        cardElement.style.backgroundColor = '#' + card.color;
+        cardElement.appendChild(document.createElement('div')).innerText = 'SNAP!';
+        cardElement.classList.add('flippedDown');
         secondRow.appendChild(cardElement);
       }
     }
   }
 }
 
-//generateCards();
+
+function startGame() {
+  // Make sure previous view is cleared
+  document.querySelector('main').innerHTML = '';
+
+  // Generate cards and populate game board
+  generateCards();
+}
 
 function doesUsernameExist(username) {
   const storedUsers = JSON.parse(localStorage.getItem('users'));
@@ -142,15 +149,20 @@ function createUser() {
     displayAlert('Username already exists! Please choose another.');
 
   } else {
+    // Dummy score data
+    let testScores = [4, 6, 8, 9, 11, 12, 13, 14, 17, 20];
 
     // Create a new user object
-    const userObject = new User(username, image, []);
+    const userObject = new User(username, image, testScores);
 
     // Call saveUser function
     saveUser(userObject);
 
     // Clear pre-game view
     document.getElementById('playerForm').style.display = 'none';
+
+    // Start Game
+    startGame();
   }
 }
 
@@ -205,6 +217,9 @@ if (localStorage.getItem('users')) {
     userContainer.addEventListener('click', () => {
       // Create a new CurrentUser object
       const currentUser = new User(user.username, user.image);
+
+      // Start Game
+      startGame();
     });
     existingPlayersSection.appendChild(userContainer);
   });
