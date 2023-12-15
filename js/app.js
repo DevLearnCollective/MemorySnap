@@ -30,16 +30,12 @@ class Card {
   flip() {
     this.flipped = !this.flipped; // Assign this.flipped the opposite true or false value of what it is currently set as.
 
-    const card = document.getElementById(this.id);
+    const card = document.getElementById(this.id).firstChild;
 
     if(this.flipped) {
-      card.classList.remove('flippedDown');
-      card.style.backgroundColor = this.color;
-      card.classList.add('flippedUp');
+      card.style = 'transform: rotateY(180deg)';
     } else {
-      card.classList.remove('flippedUp');
-      card.style.backgroundColor = null;
-      card.classList.add('flippedDown');
+      card.style = '';
     }
   }
 
@@ -89,27 +85,68 @@ function generateCards() {
   let secondRow = document.createElement('section');
   secondRow.classList.add('cardRow');
 
+  // Put card rows in main
   document.querySelector('main').appendChild(firstRow);
   document.querySelector('main').appendChild(secondRow);
+
+  // Create event listeners for the card rows to detect clicks
+  firstRow.addEventListener('click', handleCardClick);
+  secondRow.addEventListener('click', handleCardClick);
 
   // Display Cards to player
   for (let y = 1; y <= 2; y++) { // Cycle through rows
     for (let x = 1; x <= 4; x++) { // Cycle through columns
       if (y === 1) { // Populate first row
         let card = Card.cards.find(obj => obj.position[0] === y && obj.position[1] === x);
+
+        // Create Card Element
         let cardElement = document.createElement('div');
         cardElement.id = card.id;
         cardElement.classList.add('card');
-        cardElement.appendChild(document.createElement('div')).innerText = 'SNAP!';
-        cardElement.classList.add('flippedDown');
+
+        // Create Card inner Element
+        let cardInnerElement = document.createElement('div');
+        cardInnerElement.classList.add('card-inner');
+        cardElement.appendChild(cardInnerElement);
+
+        // Create Card Back
+        let cardBack = document.createElement('div');
+        cardBack.classList.add('flippedDown');
+        cardBack.appendChild(document.createElement('div')).innerText = 'SNAP!';
+        cardInnerElement.appendChild(cardBack);
+
+        // Create Card Face
+        let cardFace = document.createElement('div');
+        cardFace.classList.add('flippedUp');
+        cardFace.style.backgroundColor = '#' + card.color;
+        cardInnerElement.appendChild(cardFace);
+
         firstRow.appendChild(cardElement);
       } else { // Populate second row
         let card = Card.cards.find(obj => obj.position[0] === y && obj.position[1] === x);
+        
+        // Create Card Element
         let cardElement = document.createElement('div');
         cardElement.id = card.id;
         cardElement.classList.add('card');
-        cardElement.appendChild(document.createElement('div')).innerText = 'SNAP!';
-        cardElement.classList.add('flippedDown');
+
+        // Create Card inner Element
+        let cardInnerElement = document.createElement('div');
+        cardInnerElement.classList.add('card-inner');
+        cardElement.appendChild(cardInnerElement);
+
+        // Create Card Back
+        let cardBack = document.createElement('div');
+        cardBack.classList.add('flippedDown');
+        cardBack.appendChild(document.createElement('div')).innerText = 'SNAP!';
+        cardInnerElement.appendChild(cardBack);
+
+        // Create Card Face
+        let cardFace = document.createElement('div');
+        cardFace.classList.add('flippedUp');
+        cardFace.style.backgroundColor = '#' + card.color;
+        cardInnerElement.appendChild(cardFace);
+
         secondRow.appendChild(cardElement);
       }
     }
@@ -123,6 +160,19 @@ function startGame() {
 
   // Generate cards and populate game board
   generateCards();
+}
+
+// Handle when a card is clicked
+function handleCardClick(event) {
+  const clickedCard = event.target.closest('.card'); // Find the card
+  console.log(clickedCard.id);
+
+  //TODO: Impliment logic to check if card has been flipped already, and impliment check for when two cards have been flipped.
+  // If a card is found, Flip it
+  if (clickedCard) {
+    const card = Card.cards[clickedCard.id - 1];
+    card.flip();
+  }
 }
 
 function doesUsernameExist(username) {
