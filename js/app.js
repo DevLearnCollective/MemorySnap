@@ -116,14 +116,41 @@ function generateCards() {
   }
 }
 
+// Function to display the scoreboard
+function displayScoreboard() {
+  const scoreboardList = document.getElementById('scoreboardList');
+  scoreboardList.innerHTML = ''; // Clear existing list items
+
+  // Generate an empty numbered list from 1 to 10
+  for (let i = 1; i <= 10; i++) {
+    const listItem = document.createElement('li');
+    listItem.textContent = i;
+    scoreboardList.appendChild(listItem);
+  }
+
+  // Show the scoreboard section
+  document.getElementById('scoreboardSection').style.display = 'block';
+}
 
 function startGame() {
+
   // Make sure previous view is cleared
   document.querySelector('main').innerHTML = '';
 
   // Generate cards and populate game board
   generateCards();
+
+  // Display the scoreboard when the game is completed
+  // displayScoreboard()
 }
+
+// Button event listeners
+document.getElementById('playAgainButton').addEventListener('click', startGame);
+document.getElementById('returnButton').addEventListener('click', () => {
+  // Hide the scoreboard when returning to pre-game screen
+  document.getElementById('scoreboardSection').style.display = 'none';
+  // Implement code to display the pre-game screen or take necessary actions
+});
 
 function doesUsernameExist(username) {
   const storedUsers = JSON.parse(localStorage.getItem('users'));
