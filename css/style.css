@@ -169,16 +169,39 @@ main {
 
 .card {
   width: 20vh;
+  background-color: transparent;
+
+  transition: transform 0.5s ease-in-out;
+  perspective: 1000px;
+}
+
+/* .card:hover {
+  transform: translateY(-2vh);
+} */
+
+.card-inner {
+  position: absolute;
+  width: 20vh;
+  height: 24vh;
   border-radius: 10px;
   border-color: white;
   border-width: 5px;
   border-style: solid;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-  transition: transform 0.5s ease-in-out;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
 }
 
-.card:hover {
-  transform: translateY(-2vh);
+/* .card:hover .card-inner {
+  transform: rotateY(180deg);
+} */
+
+.flippedDown, .flippedUp {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
 }
 
 .flippedDown {
@@ -186,15 +209,15 @@ main {
 }
 
 .flippedDown div {
-  width: 200px;
-  height: 100px;
+  width: 22vh;
+  height: 11vh;
   background: white;
   border-radius: 100px / 50px;
   transform: rotate(-0.15turn);
   
   position: relative;
   top: 6.25vh;
-  left: -1.5vh;
+  left: -1vh;
 
   display: flex;
   justify-content: center;
@@ -205,6 +228,10 @@ main {
   font-weight: 900;
   font-family: "Comic Sans MS", sans-serif;
   color: #ff0000;
+}
+
+.flippedUp {
+  transform: rotateY(180deg) translateY(-24vh);
 }
 
 #copyright {
