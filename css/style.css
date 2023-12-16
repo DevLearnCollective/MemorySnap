@@ -175,10 +175,6 @@ main {
   perspective: 1000px;
 }
 
-/* .card:hover {
-  transform: translateY(-2vh);
-} */
-
 .card-inner {
   position: absolute;
   width: 20vh;
@@ -188,13 +184,13 @@ main {
   border-width: 5px;
   border-style: solid;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-  transition: transform 0.8s;
+  transition: opacity 0.3s ease-in-out, transform 0.8s;
   transform-style: preserve-3d;
 }
 
-/* .card:hover .card-inner {
-  transform: rotateY(180deg);
-} */
+.card-inner :hover {
+  cursor: pointer;
+}
 
 .flippedDown, .flippedUp {
   position: relative;
@@ -232,6 +228,10 @@ main {
 
 .flippedUp {
   transform: rotateY(180deg) translateY(-24vh);
+}
+
+.hidden {
+  opacity: 0;
 }
 
 #copyright {
