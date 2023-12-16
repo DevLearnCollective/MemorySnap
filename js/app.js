@@ -40,12 +40,11 @@ class Card {
   }
 
   // Remove the card from the game view.
-  guessed() {
+  guess() {
     this.guessed = true;
 
-    const card = document.getElementById(this.id);
-
-    card.parentNode.removeChild(card);
+    const card = document.getElementById(this.id).firstChild;
+    card.classList.toggle('hidden');
   }
 }
 
@@ -165,14 +164,52 @@ function startGame() {
 // Handle when a card is clicked
 function handleCardClick(event) {
   const clickedCard = event.target.closest('.card'); // Find the card
-  console.log(clickedCard.id);
 
-  //TODO: Impliment logic to check if card has been flipped already, and impliment check for when two cards have been flipped.
   // If a card is found, Flip it
   if (clickedCard) {
     const card = Card.cards[clickedCard.id - 1];
-    card.flip();
+
+    // If the card is not already flipped, then continue
+    if (!card.flipped && !card.guessed) {
+      let flippedCards = Card.cards.filter(card => card.flipped); // Get all flipped cards
+
+      if (flippedCards.length === 1) { // Check if a card has already been flipped, if not then flip it. if so then check if they match
+        gameScore++;
+        card.flip();
+        flippedCards = Card.cards.filter(card => card.flipped);
+
+        if (flippedCards[0].color === flippedCards[1].color) {
+          setTimeout(function() {
+            flippedCards[0].flip();
+            flippedCards[1].flip();
+          }, 1000);
+
+          setTimeout(function() {
+            flippedCards[0].guess();
+            flippedCards[1].guess();
+          }, 2000);
+
+          setTimeout(checkEndGame, 2010);
+        } else {
+          setTimeout(function() {
+            flippedCards[0].flip();
+            flippedCards[1].flip();
+          }, 2000)
+        }
+      } else if (flippedCards.length === 0) {
+        card.flip();
+      }
+    }
   }
+}
+
+function checkEndGame () {
+ // Handle End Game
+ const guessedCards = Card.cards.filter(card => card.guessed); // Get all guessed cards.
+ if (guessedCards.length === 8) {
+   //TODO: Move to score screen, maybe handle checking and saving user score. that could be its own function.
+   alert(gameScore);
+ }
 }
 
 function doesUsernameExist(username) {
