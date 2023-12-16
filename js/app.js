@@ -30,26 +30,21 @@ class Card {
   flip() {
     this.flipped = !this.flipped; // Assign this.flipped the opposite true or false value of what it is currently set as.
 
-    const card = document.getElementById(this.id);
+    const card = document.getElementById(this.id).firstChild;
 
     if(this.flipped) {
-      card.classList.remove('flippedDown');
-      card.style.backgroundColor = this.color;
-      card.classList.add('flippedUp');
+      card.style = 'transform: rotateY(180deg)';
     } else {
-      card.classList.remove('flippedUp');
-      card.style.backgroundColor = null;
-      card.classList.add('flippedDown');
+      card.style = '';
     }
   }
 
   // Remove the card from the game view.
-  guessed() {
+  guess() {
     this.guessed = true;
 
-    const card = document.getElementById(this.id);
-
-    card.parentNode.removeChild(card);
+    const card = document.getElementById(this.id).firstChild;
+    card.classList.toggle('hidden');
   }
 }
 
@@ -89,27 +84,68 @@ function generateCards() {
   let secondRow = document.createElement('section');
   secondRow.classList.add('cardRow');
 
+  // Put card rows in main
   document.querySelector('main').appendChild(firstRow);
   document.querySelector('main').appendChild(secondRow);
+
+  // Create event listeners for the card rows to detect clicks
+  firstRow.addEventListener('click', handleCardClick);
+  secondRow.addEventListener('click', handleCardClick);
 
   // Display Cards to player
   for (let y = 1; y <= 2; y++) { // Cycle through rows
     for (let x = 1; x <= 4; x++) { // Cycle through columns
       if (y === 1) { // Populate first row
         let card = Card.cards.find(obj => obj.position[0] === y && obj.position[1] === x);
+
+        // Create Card Element
         let cardElement = document.createElement('div');
         cardElement.id = card.id;
         cardElement.classList.add('card');
-        cardElement.appendChild(document.createElement('div')).innerText = 'SNAP!';
-        cardElement.classList.add('flippedDown');
+
+        // Create Card inner Element
+        let cardInnerElement = document.createElement('div');
+        cardInnerElement.classList.add('card-inner');
+        cardElement.appendChild(cardInnerElement);
+
+        // Create Card Back
+        let cardBack = document.createElement('div');
+        cardBack.classList.add('flippedDown');
+        cardBack.appendChild(document.createElement('div')).innerText = 'SNAP!';
+        cardInnerElement.appendChild(cardBack);
+
+        // Create Card Face
+        let cardFace = document.createElement('div');
+        cardFace.classList.add('flippedUp');
+        cardFace.style.backgroundColor = '#' + card.color;
+        cardInnerElement.appendChild(cardFace);
+
         firstRow.appendChild(cardElement);
       } else { // Populate second row
         let card = Card.cards.find(obj => obj.position[0] === y && obj.position[1] === x);
+        
+        // Create Card Element
         let cardElement = document.createElement('div');
         cardElement.id = card.id;
         cardElement.classList.add('card');
-        cardElement.appendChild(document.createElement('div')).innerText = 'SNAP!';
-        cardElement.classList.add('flippedDown');
+
+        // Create Card inner Element
+        let cardInnerElement = document.createElement('div');
+        cardInnerElement.classList.add('card-inner');
+        cardElement.appendChild(cardInnerElement);
+
+        // Create Card Back
+        let cardBack = document.createElement('div');
+        cardBack.classList.add('flippedDown');
+        cardBack.appendChild(document.createElement('div')).innerText = 'SNAP!';
+        cardInnerElement.appendChild(cardBack);
+
+        // Create Card Face
+        let cardFace = document.createElement('div');
+        cardFace.classList.add('flippedUp');
+        cardFace.style.backgroundColor = '#' + card.color;
+        cardInnerElement.appendChild(cardFace);
+
         secondRow.appendChild(cardElement);
       }
     }
@@ -151,6 +187,57 @@ document.getElementById('returnButton').addEventListener('click', () => {
   document.getElementById('scoreboardSection').style.display = 'none';
   // Implement code to display the pre-game screen or take necessary actions
 });
+
+// Handle when a card is clicked
+function handleCardClick(event) {
+  const clickedCard = event.target.closest('.card'); // Find the card
+
+  // If a card is found, Flip it
+  if (clickedCard) {
+    const card = Card.cards[clickedCard.id - 1];
+
+    // If the card is not already flipped, then continue
+    if (!card.flipped && !card.guessed) {
+      let flippedCards = Card.cards.filter(card => card.flipped); // Get all flipped cards
+
+      if (flippedCards.length === 1) { // Check if a card has already been flipped, if not then flip it. if so then check if they match
+        gameScore++;
+        card.flip();
+        flippedCards = Card.cards.filter(card => card.flipped);
+
+        if (flippedCards[0].color === flippedCards[1].color) {
+          setTimeout(function() {
+            flippedCards[0].flip();
+            flippedCards[1].flip();
+          }, 1000);
+
+          setTimeout(function() {
+            flippedCards[0].guess();
+            flippedCards[1].guess();
+          }, 2000);
+
+          setTimeout(checkEndGame, 2010);
+        } else {
+          setTimeout(function() {
+            flippedCards[0].flip();
+            flippedCards[1].flip();
+          }, 2000)
+        }
+      } else if (flippedCards.length === 0) {
+        card.flip();
+      }
+    }
+  }
+}
+
+function checkEndGame () {
+ // Handle End Game
+ const guessedCards = Card.cards.filter(card => card.guessed); // Get all guessed cards.
+ if (guessedCards.length === 8) {
+   //TODO: Move to score screen, maybe handle checking and saving user score. that could be its own function.
+   alert(gameScore);
+ }
+}
 
 function doesUsernameExist(username) {
   const storedUsers = JSON.parse(localStorage.getItem('users'));
