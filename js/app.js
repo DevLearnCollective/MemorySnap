@@ -154,18 +154,47 @@ function generateCards() {
 
 // Function to display the scoreboard
 function displayScoreboard() {
-  const scoreboardList = document.getElementById('scoreboardList');
-  scoreboardList.innerHTML = ''; // Clear existing list items
+
+    // Create numbered list area
+    let scoreboardSection = document.createElement('section');
+    scoreboardSection.id = 'scoreboardSection';
+    document.querySelector('main').appendChild(scoreboardSection);
+
+    let scoreHeader = document.createElement('h2');
+    scoreHeader.innerText = 'Top Ten Scores';
+    scoreboardSection.appendChild(scoreHeader);
+
+    let scoreboardList = document.createElement('ol');
+    scoreboardList.id = 'scoreboardList';
+    scoreboardSection.appendChild(scoreboardList);
+
+    let buttonContainer = document.createElement('div');
+    buttonContainer.id = 'buttonContainer';
+    scoreboardSection.appendChild(buttonContainer);
+
+    let playAgainButton = document.createElement('button');
+    playAgainButton.id = 'playAgainButton';
+    playAgainButton.innerText = 'Play Again';
+    buttonContainer.appendChild(playAgainButton);
+    playAgainButton.addEventListener('click', startGame);
+
+    let returnButton = document.createElement('button');
+    returnButton.id = 'returnButton';
+    returnButton.innerText = 'Exit Game';
+    buttonContainer.appendChild(returnButton);
+    returnButton.addEventListener('click', () => {
+      // Hide the scoreboard when returning to pre-game screen
+  
+      location.reload();
+    });
+
 
   // Generate an empty numbered list from 1 to 10
-  for (let i = 1; i <= 10; i++) {
+  for (score in User.currentUser.scores) {
     const listItem = document.createElement('li');
-    listItem.textContent = i;
+    listItem.textContent = User.currentUser.scores[score];
     scoreboardList.appendChild(listItem);
   }
-
-  // Show the scoreboard section
-  document.getElementById('scoreboardSection').style.display = 'block';
 }
 
 function startGame() {
@@ -175,18 +204,10 @@ function startGame() {
 
   // Generate cards and populate game board
   generateCards();
-
-  // Display the scoreboard when the game is completed
-  // displayScoreboard()
+  // displayScoreboard();
 }
 
-// Button event listeners
-document.getElementById('playAgainButton').addEventListener('click', startGame);
-document.getElementById('returnButton').addEventListener('click', () => {
-  // Hide the scoreboard when returning to pre-game screen
-  document.getElementById('scoreboardSection').style.display = 'none';
-  // Implement code to display the pre-game screen or take necessary actions
-});
+
 
 // Handle when a card is clicked
 function handleCardClick(event) {
@@ -235,7 +256,8 @@ function checkEndGame () {
  const guessedCards = Card.cards.filter(card => card.guessed); // Get all guessed cards.
  if (guessedCards.length === 8) {
    //TODO: Move to score screen, maybe handle checking and saving user score. that could be its own function.
-   alert(gameScore);
+    // Display the scoreboard when the game is completed
+    displayScoreboard()
  }
 }
 
@@ -349,7 +371,7 @@ if (localStorage.getItem('users')) {
     userContainer.appendChild(userImageElement); // Image displayed below username
     userContainer.addEventListener('click', () => {
       // Create a new CurrentUser object
-      const currentUser = new User(user.username, user.image);
+      const currentUser = new User(user.username, user.image, user.scores);
 
       // Start Game
       startGame();
