@@ -152,14 +152,62 @@ function generateCards() {
   }
 }
 
+// Function to display the scoreboard
+function displayScoreboard() {
+
+    // Create numbered list area
+    let scoreboardSection = document.createElement('section');
+    scoreboardSection.id = 'scoreboardSection';
+    document.querySelector('main').appendChild(scoreboardSection);
+
+    let scoreHeader = document.createElement('h2');
+    scoreHeader.innerText = 'Top Ten Scores';
+    scoreboardSection.appendChild(scoreHeader);
+
+    let scoreboardList = document.createElement('ol');
+    scoreboardList.id = 'scoreboardList';
+    scoreboardSection.appendChild(scoreboardList);
+
+    let buttonContainer = document.createElement('div');
+    buttonContainer.id = 'buttonContainer';
+    scoreboardSection.appendChild(buttonContainer);
+
+    let playAgainButton = document.createElement('button');
+    playAgainButton.id = 'playAgainButton';
+    playAgainButton.innerText = 'Play Again';
+    buttonContainer.appendChild(playAgainButton);
+    playAgainButton.addEventListener('click', startGame);
+
+    let returnButton = document.createElement('button');
+    returnButton.id = 'returnButton';
+    returnButton.innerText = 'Exit Game';
+    buttonContainer.appendChild(returnButton);
+    returnButton.addEventListener('click', () => {
+      // Hide the scoreboard when returning to pre-game screen
+  
+      location.reload();
+    });
+
+
+  // Generate an empty numbered list from 1 to 10
+  for (score in User.currentUser.scores) {
+    const listItem = document.createElement('li');
+    listItem.textContent = User.currentUser.scores[score];
+    scoreboardList.appendChild(listItem);
+  }
+}
 
 function startGame() {
+
   // Make sure previous view is cleared
   document.querySelector('main').innerHTML = '';
 
   // Generate cards and populate game board
   generateCards();
+  // displayScoreboard();
 }
+
+
 
 // Handle when a card is clicked
 function handleCardClick(event) {
@@ -208,7 +256,8 @@ function checkEndGame () {
  const guessedCards = Card.cards.filter(card => card.guessed); // Get all guessed cards.
  if (guessedCards.length === 8) {
    //TODO: Move to score screen, maybe handle checking and saving user score. that could be its own function.
-   alert(gameScore);
+    // Display the scoreboard when the game is completed
+    displayScoreboard()
  }
 }
 
@@ -221,6 +270,25 @@ function doesUsernameExist(username) {
     }
   }
   return false; // Username does not exist in the stored data
+}
+
+function displayAlert(message) {
+  const alertText = document.getElementById('alertText');
+  alertText.textContent = message;
+
+  const alertMessage = document.getElementById('alertMessage');
+  alertMessage.classList.add('alert-active');
+
+  const overlay = document.querySelector('.overlay');
+  overlay.classList.add('alert-active');
+}
+
+function hideAlert() {
+  const alertMessage = document.getElementById('alertMessage');
+  alertMessage.classList.remove('alert-active');
+
+  const overlay = document.querySelector('.overlay');
+  overlay.classList.remove('alert-active');
 }
 
 function createUser() {
@@ -303,7 +371,7 @@ if (localStorage.getItem('users')) {
     userContainer.appendChild(userImageElement); // Image displayed below username
     userContainer.addEventListener('click', () => {
       // Create a new CurrentUser object
-      const currentUser = new User(user.username, user.image);
+      const currentUser = new User(user.username, user.image, user.scores);
 
       // Start Game
       startGame();
