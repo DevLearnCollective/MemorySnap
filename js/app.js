@@ -202,6 +202,11 @@ function startGame() {
   // Make sure previous view is cleared
   document.querySelector('main').innerHTML = '';
 
+  // Clear previous cards
+  Card.cards = []; 
+  Card.lastId = 0;
+  gameScore = 0;
+
   // Generate cards and populate game board
   generateCards();
   // displayScoreboard();
@@ -254,10 +259,40 @@ function handleCardClick(event) {
 function checkEndGame () {
  // Handle End Game
  const guessedCards = Card.cards.filter(card => card.guessed); // Get all guessed cards.
- if (guessedCards.length === 8) {
-   //TODO: Move to score screen, maybe handle checking and saving user score. that could be its own function.
-    // Display the scoreboard when the game is completed
-    displayScoreboard()
+ let endScores = User.currentUser.scores;
+
+ if (guessedCards.length === Card.cards.length) {
+    // If current score isn't in our scores list, then add it in.
+    if (!endScores.includes(gameScore)) {
+      // Jut add the score in if there are no other values.
+      if (endScores.length === 0) {
+        endScores.push(gameScore);
+      } else {
+        // Let's find where the score goes and put it in the correct place.
+        for (score in endScores) {
+          if (gameScore < endScores[score]) {
+            endScores.splice(score, 0, gameScore);
+
+            // Trim scores if there are more than 10
+            while (endScores.length > 10) {
+              endScores.pop();
+            }
+
+            // Stop the loop because we found where our score goes
+            break;
+          }
+
+          // If we can't find it and we don't have 10 scores yet, then add it to the end of the scores and save scores to localstorage.
+          if ( score == endScores.length -1 && endScores.length < 10) {
+            endScores.push(gameScore);
+          }
+        }
+      }
+    }
+    // Save scores and display the scoreboard when the game is completed
+    saveUser(User.currentUser);
+
+    displayScoreboard();
  }
 }
 
@@ -304,11 +339,8 @@ function createUser() {
     displayAlert('Username already exists! Please choose another.');
 
   } else {
-    // Dummy score data
-    let testScores = [4, 6, 8, 9, 11, 12, 13, 14, 17, 20];
-
     // Create a new user object
-    const userObject = new User(username, image, testScores);
+    const userObject = new User(username, image, []);
 
     // Call saveUser function
     saveUser(userObject);
@@ -339,9 +371,13 @@ function saveUser(user) {
   // Parse localStorage to a variable
   let users = JSON.parse(localStorage.getItem('users')) || [];
 
-  // Push the new user to the variable
-  users.push(user);
-
+  if (doesUsernameExist(user.username)) {
+    // If user exists then replace old user data with new user data
+    users.splice(users.findIndex(findUser => findUser.username === user.username), 1, user);
+  } else {
+    // Push the new user to the variable
+    users.push(user);
+  }
   // Save the variable back to localStorage
   localStorage.setItem('users', JSON.stringify(users));
 }
