@@ -258,6 +258,24 @@ main {
   opacity: 0;
 }
 
+#congrats {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 6vh;
+  margin-bottom: 6vh;
+  font-size: 5vh;
+  font-family: "Comic Sans MS", sans-serif;
+  color: white;
+  text-shadow: 
+  1px 1px 10px rgb(26, 126, 75), /* Main shadow */
+  1px 1px 1px rgb(26, 126, 75), /* Top-left shadow */
+  1px 1px 1px rgb(26, 126, 75), /* Top-right shadow */
+  0px 0px 0px rgb(26, 126, 75); /* Bottom-left shadow */
+}
+
 #scoreboardSection {
   background-color:rgb(174, 204, 222);
   border: 1vh solid rgb(50, 104, 136);
