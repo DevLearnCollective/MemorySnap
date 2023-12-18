@@ -161,6 +161,7 @@ function displayScoreboard() {
     document.querySelector('main').appendChild(scoreboardSection);
 
     let scoreHeader = document.createElement('h2');
+    scoreHeader.id = 'scoreHeader';
     scoreHeader.innerText = 'Top Ten Scores';
     scoreboardSection.appendChild(scoreHeader);
 
@@ -208,6 +209,7 @@ function startGame() {
   gameScore = 0;
 
   // Generate cards and populate game board
+
   generateCards();
   // displayScoreboard();
 }

@@ -258,6 +258,86 @@ main {
   opacity: 0;
 }
 
+#scoreboardSection {
+  background-color:rgb(174, 204, 222);
+  border: 1vh solid rgb(50, 104, 136);
+  border-radius: 3vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 40vh;
+  width: 20vw;
+  margin-top: 4vh;
+  box-sizing: border-box;
+}
+
+#scoreHeader {
+  margin-top: 2vh; 
+  font-weight: bold; /* Make the text bold */
+  font-size: 2.5em; /* Adjust the font size as needed */
+  font-family: "Comic Sans MS", sans-serif;
+  color: white;
+  text-shadow: 
+  1px 1px 10px rgba(50, 104, 136), /* Main shadow */
+  1px 1px 1px rgba(50, 104, 136), /* Top-left shadow */
+  1px 1px 1px rgba(50, 104, 136), /* Top-right shadow */
+  0px 0px 0px rgba(50, 104, 136); /* Bottom-left shadow */
+}
+
+
+/* Style the ol element to remove default numbering */
+#scoreboardList {
+  counter-reset: scoreboardCounter; /* Initialize the counter */
+  list-style: none; /* Remove default list styles */
+  padding-left: 0; /* Remove default padding */
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+}
+
+/* Style the li elements to display the counter value */
+#scoreboardList li::before {
+  counter-increment: scoreboardCounter; /* Increment the counter for each list item */
+  content: counter(scoreboardCounter) ". "; /* Display the counter number */
+  margin-right: 1.5vh; /* Add spacing between the counter and text */
+  font-size: 1.2em;
+}
+
+#buttonContainer {
+  width: 37vh;
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 2vh;
+}
+
+#playAgainButton {
+  padding: .75vh 3vh;
+  font-size: 2vh;
+  background-color: rgb(50, 104, 136); 
+  color: white;
+  border: none;
+  border-radius: 2vh;
+  cursor: pointer;
+}
+
+#playAgainButton:hover {
+  background-color: rgb(26, 126, 75);
+}
+
+#returnButton {
+  padding: .75vh 3vh;
+  font-size: 2vh;
+  background-color: rgb(50, 104, 136); 
+  color: white;
+  border: none;
+  border-radius: 2vh;
+  cursor: pointer;
+}
+
+#returnButton:hover {
+  background-color: rgb(26, 126, 75);
+}
+
 #copyright {
   height: 5vh;
   margin-top: 1.5vh;
