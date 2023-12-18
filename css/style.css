@@ -1,0 +1,365 @@
+body {
+  background-color: rgb(123, 202, 162);
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
+}
+
+#title {
+  border: 2vh double rgb(26, 126, 75);
+  background-color: rgb(175, 228, 201);
+  border-radius: 2vh;
+  text-align: center;
+  height: 18vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#title h1 {
+  margin: 0;
+  font-size: 10vh; 
+  font-style: italic;
+  font-weight: 900;
+  font-family: "Comic Sans MS", sans-serif;
+  color: white;
+  text-shadow: 
+    1px 1px 15px rgba(26, 126, 75), /* Main shadow */
+    1px 1px 1px rgba(26, 126, 75), /* Top-left shadow */
+    1px 1px 1px rgba(26, 126, 75), /* Top-right shadow */
+    1px 1px 1px rgba(26, 126, 75); /* Bottom-left shadow */
+}
+
+#title h3 {
+  margin: 0;
+  margin-top: 2.5vh;
+  font-size: 3vh;
+  font-weight: 200;
+  font-family: "Comic Sans MS", sans-serif;
+  color: white;
+  text-shadow: 
+    1px 1px 5px rgba(26, 126, 75), /* Main shadow */
+    1px 1px 5px rgba(26, 126, 75), /* Top-left shadow */
+    1px 1px 5px rgba(26, 126, 75), /* Top-right shadow */
+    1px 1px 1px rgba(26, 126, 75); /* Bottom-left shadow */
+}
+
+main {
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#playerForm {
+  border: 1vh solid rgb(50, 104, 136);
+  border-radius: 3vh;
+  background-color: rgb(174, 204, 222);
+  margin-top: 4vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 1vh;
+  height: 5vh;
+  width: 50vw;
+  max-width: 100%;
+  color: white;
+  text-shadow: 
+  1px 1px 10px rgba(50, 104, 136), /* Main shadow */
+  1px 1px 1px rgba(50, 104, 136), /* Top-left shadow */
+  1px 1px 1px rgba(50, 104, 136), /* Top-right shadow */
+  0px 0px 0px rgba(50, 104, 136); /* Bottom-left shadow */
+  font-size: 3vh;
+  font-family: "Comic Sans MS", sans-serif;
+}
+
+#submitButton {
+  padding: .75vh 3vh;
+  font-size: 2.5vh;
+  background-color: rgb(50, 104, 136); 
+  color: white;
+  border: none;
+  border-radius: 2vh;
+  cursor: pointer;
+}
+
+#submitButton:hover {
+  background-color: rgb(26, 126, 75);
+}
+
+#alertMessage {
+  position: fixed; /* Fixed position for the alert box */
+  top: 50%; /* Adjust the top position */
+  left: 50%; /* Adjust the left position */
+  transform: translate(-50%, -50%); /* Center the alert box */
+  z-index: 9999; /* Ensure the alert box is on top of other content */
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+  padding: 5%; /* Adjust padding as needed */
+  border-radius: 1em; /* Add rounded corners */
+  box-shadow: 0 0 100px rgba(0, 0, 0, 0.6); /* Add a subtle shadow */
+}
+
+/* Style for the alert text */
+#alertText {
+  font-size: 34px;
+  color: black;
+  font-family: Arial, sans-serif;
+}
+
+/* Display the overlay when alert is active */
+.alert-active .overlay {
+  display: block;
+}
+
+#existingPlayers {
+  border: 2px solid rgb(26, 126, 75);
+  align-self: flex-start;
+  margin-left: 9.5vw;
+  margin-top: 1vh; 
+  margin-bottom: -4.5vh;
+  padding: 1vh;
+  background-color: rgb(175, 228, 201);
+  font-size: 2.5vh;
+  font-family: "Comic Sans MS", sans-serif;
+  color: white;
+  text-shadow: 
+  1px 1px 5px rgba(26, 126, 75), /* Main shadow */
+  1px 1px 5px rgba(26, 126, 75), /* Top-left shadow */
+  1px 1px 5px rgba(26, 126, 75), /* Top-right shadow */
+  0px 0px 0px rgba(26, 126, 75); /* Bottom-left shadow */
+}
+
+#existingPlayersContainer {
+  border: 2px solid rgb(26, 126, 75);
+  display: flex;
+  flex-wrap: wrap;
+  background-color: rgb(175, 228, 201);
+  height: 60vh;
+  width: 80vw; 
+  max-width: 100%; 
+  margin-top: 4vh; 
+  overflow: auto;
+}
+
+#existingPlayersContainer p {
+  text-align: center;
+  margin-top: 3vh;
+  font-size: 3vh;
+  font-family: "Comic Sans MS", sans-serif;
+  color: white;
+  text-shadow: 
+  0px 0px 5px rgba(26, 126, 75), /* Main shadow */
+  1px 1px 5px rgba(26, 126, 75), /* Top-left shadow */
+  1px 1px 5px rgba(26, 126, 75), /* Top-right shadow */
+  0px 0px 0px rgba(26, 126, 75); /* Bottom-left shadow */
+}
+
+#existingPlayersContainer img {
+  width: 15vw; 
+  height: 25vh; 
+  margin: 3vh;
+  margin-left: 3vw;
+  text-align: center;
+  object-fit: cover;
+  border-radius: 5vh;
+  transition: transform 0.3s ease; 
+}
+
+#existingPlayersContainer img:hover {
+  transform: translateY(-10px); 
+  animation: bounce .6s ease infinite; 
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0); 
+  }
+  50% {
+    transform: translateY(-10px); 
+  }
+}
+
+.cardRow {
+  width: 100vw;
+  height: 25vh;
+  margin-top: 10vh;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.card {
+  width: 20vh;
+  background-color: transparent;
+
+  transition: transform 0.5s ease-in-out;
+  perspective: 1000px;
+}
+
+.card-inner {
+  position: absolute;
+  width: 20vh;
+  height: 24vh;
+  border-radius: 10px;
+  border-color: white;
+  border-width: 5px;
+  border-style: solid;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.3s ease-in-out, transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.card-inner :hover {
+  cursor: pointer;
+}
+
+.flippedDown, .flippedUp {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+.flippedDown {
+  background-color: #2f2f2f;
+}
+
+.flippedDown div {
+  width: 22vh;
+  height: 11vh;
+  background: white;
+  border-radius: 100px / 50px;
+  transform: rotate(-0.15turn);
+  
+  position: relative;
+  top: 6.25vh;
+  left: -1vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 5vh; 
+  font-style: italic;
+  font-weight: 900;
+  font-family: "Comic Sans MS", sans-serif;
+  color: #ff0000;
+}
+
+.flippedUp {
+  transform: rotateY(180deg) translateY(-24vh);
+}
+
+.hidden {
+  opacity: 0;
+}
+
+#congrats {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 6vh;
+  margin-bottom: 6vh;
+  font-size: 5vh;
+  font-family: "Comic Sans MS", sans-serif;
+  color: white;
+  text-shadow: 
+  1px 1px 10px rgb(26, 126, 75), /* Main shadow */
+  1px 1px 1px rgb(26, 126, 75), /* Top-left shadow */
+  1px 1px 1px rgb(26, 126, 75), /* Top-right shadow */
+  0px 0px 0px rgb(26, 126, 75); /* Bottom-left shadow */
+}
+
+#scoreboardSection {
+  background-color:rgb(174, 204, 222);
+  border: 1vh solid rgb(50, 104, 136);
+  border-radius: 3vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 40vh;
+  width: 20vw;
+  margin-top: 4vh;
+  box-sizing: border-box;
+}
+
+#scoreHeader {
+  margin-top: 2vh; 
+  font-weight: bold; /* Make the text bold */
+  font-size: 2.5em; /* Adjust the font size as needed */
+  font-family: "Comic Sans MS", sans-serif;
+  color: white;
+  text-shadow: 
+  1px 1px 10px rgba(50, 104, 136), /* Main shadow */
+  1px 1px 1px rgba(50, 104, 136), /* Top-left shadow */
+  1px 1px 1px rgba(50, 104, 136), /* Top-right shadow */
+  0px 0px 0px rgba(50, 104, 136); /* Bottom-left shadow */
+}
+
+
+/* Style the ol element to remove default numbering */
+#scoreboardList {
+  counter-reset: scoreboardCounter; /* Initialize the counter */
+  list-style: none; /* Remove default list styles */
+  padding-left: 0; /* Remove default padding */
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+}
+
+/* Style the li elements to display the counter value */
+#scoreboardList li::before {
+  counter-increment: scoreboardCounter; /* Increment the counter for each list item */
+  content: counter(scoreboardCounter) ". "; /* Display the counter number */
+  margin-right: 1.5vh; /* Add spacing between the counter and text */
+  font-size: 1.2em;
+}
+
+#buttonContainer {
+  width: 37vh;
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 2vh;
+}
+
+#playAgainButton {
+  padding: .75vh 3vh;
+  font-size: 2vh;
+  background-color: rgb(50, 104, 136); 
+  color: white;
+  border: none;
+  border-radius: 2vh;
+  cursor: pointer;
+}
+
+#playAgainButton:hover {
+  background-color: rgb(26, 126, 75);
+}
+
+#returnButton {
+  padding: .75vh 3vh;
+  font-size: 2vh;
+  background-color: rgb(50, 104, 136); 
+  color: white;
+  border: none;
+  border-radius: 2vh;
+  cursor: pointer;
+}
+
+#returnButton:hover {
+  background-color: rgb(26, 126, 75);
+}
+
+#copyright {
+  height: 5vh;
+  margin-top: 1.5vh;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}

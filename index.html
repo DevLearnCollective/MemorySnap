@@ -1,1 +1,52 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Snap</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/reset.css">
+</head>
+<body>
+  <header>
+    <div id="title">
+      <h1>Memory Snap</h1>
+      <h3>(Snap snap!)</h3>
+    </div>
+  </header>
+  <main>
+    <section id="playerForm">
+      <label for="createUsername">Create Username</label>
+      <input type="text" id="createUsername" name="username">
+      <label for="selectImage">Select Image</label>
+      <select id="selectImage" name="image">
+        <option value="/img/apples.png">Apples</option>
+        <option value="/img/banana.png">Bananas</option>
+        <option value="/img/bean.png">Bean</option>
+        <option value="/img/caterpillar.png">Caterpillar</option>
+        <option value="/img/chickenwing.png">Chicken Wing</option>
+        <option value="/img/drum.png">Drum</option>
+        <option value="/img/honey.png">Honey</option>
+        <option value="/img/house.png">House</option>
+        <option value="/img/log.png">Log</option>
+        <option value="/img/pencil.png">Pencil</option>
+        <option value="/img/sailboat.png">Sailboat</option>
+        <option value="/img/scissors.png">Scissors</option>
+      </select>
+      <button type="button" id="submitButton">Submit</button>
+      <div id="alertMessage" style="display: none;">
+        <p id="alertText"></p>
+      </div>
+    </section>
+    <p id="existingPlayers">Existing Players</p>
+    <section id="existingPlayersContainer">
+    </section>
+  </main>
+  <footer>
+    <div id="copyright">
+      <p>&copy; 2023 Memory Snap</p>
+    </div>
+  </footer>
+  <script src="js/app.js" type="text/javascript"></script> 
+</body>
+</html>
