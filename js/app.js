@@ -155,39 +155,45 @@ function generateCards() {
 // Function to display the scoreboard
 function displayScoreboard() {
 
-    // Create numbered list area
-    let scoreboardSection = document.createElement('section');
-    scoreboardSection.id = 'scoreboardSection';
-    document.querySelector('main').appendChild(scoreboardSection);
+  // Create congrats message
+  let congrats = document.createElement('p');
+  congrats.id = 'congrats';
+  congrats.innerHTML = 'Congratulations! Your score is <br>' + gameScore;
+  document.querySelector('main').appendChild(congrats);
 
-    let scoreHeader = document.createElement('h2');
-    scoreHeader.id = 'scoreHeader';
-    scoreHeader.innerText = 'Top Ten Scores';
-    scoreboardSection.appendChild(scoreHeader);
+  // Create numbered list area
+  let scoreboardSection = document.createElement('section');
+  scoreboardSection.id = 'scoreboardSection';
+  document.querySelector('main').appendChild(scoreboardSection);
 
-    let scoreboardList = document.createElement('ol');
-    scoreboardList.id = 'scoreboardList';
-    scoreboardSection.appendChild(scoreboardList);
+  let scoreHeader = document.createElement('h2');
+  scoreHeader.id = 'scoreHeader';
+  scoreHeader.innerText = 'Top Ten Scores';
+  scoreboardSection.appendChild(scoreHeader);
 
-    let buttonContainer = document.createElement('div');
-    buttonContainer.id = 'buttonContainer';
-    scoreboardSection.appendChild(buttonContainer);
+  let scoreboardList = document.createElement('ol');
+  scoreboardList.id = 'scoreboardList';
+  scoreboardSection.appendChild(scoreboardList);
 
-    let playAgainButton = document.createElement('button');
-    playAgainButton.id = 'playAgainButton';
-    playAgainButton.innerText = 'Play Again';
-    buttonContainer.appendChild(playAgainButton);
-    playAgainButton.addEventListener('click', startGame);
+  let buttonContainer = document.createElement('div');
+  buttonContainer.id = 'buttonContainer';
+  scoreboardSection.appendChild(buttonContainer);
 
-    let returnButton = document.createElement('button');
-    returnButton.id = 'returnButton';
-    returnButton.innerText = 'Exit Game';
-    buttonContainer.appendChild(returnButton);
-    returnButton.addEventListener('click', () => {
-      // Hide the scoreboard when returning to pre-game screen
-  
-      location.reload();
-    });
+  let playAgainButton = document.createElement('button');
+  playAgainButton.id = 'playAgainButton';
+  playAgainButton.innerText = 'Play Again';
+  buttonContainer.appendChild(playAgainButton);
+  playAgainButton.addEventListener('click', startGame);
+
+  let returnButton = document.createElement('button');
+  returnButton.id = 'returnButton';
+  returnButton.innerText = 'Exit Game';
+  buttonContainer.appendChild(returnButton);
+  returnButton.addEventListener('click', () => {
+    // Hide the scoreboard when returning to pre-game screen
+
+    location.reload();
+  });
 
 
   // Generate an empty numbered list from 1 to 10
@@ -293,7 +299,7 @@ function checkEndGame () {
     }
     // Save scores and display the scoreboard when the game is completed
     saveUser(User.currentUser);
-
+    document.querySelector('main').innerHTML = '';
     displayScoreboard();
  }
 }
