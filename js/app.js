@@ -204,8 +204,9 @@ function startGame() {
   document.querySelector('main').innerHTML = '';
 
   // Generate cards and populate game board
-  // generateCards();
-  displayScoreboard();
+
+  generateCards();
+  // displayScoreboard();
 }
 
 
