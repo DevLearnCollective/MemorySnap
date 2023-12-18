@@ -248,14 +248,14 @@ function handleCardClick(event) {
           setTimeout(function() {
             flippedCards[0].guess();
             flippedCards[1].guess();
-          }, 2000);
+          }, 1500);
 
-          setTimeout(checkEndGame, 2010);
+          setTimeout(checkEndGame, 2000);
         } else {
           setTimeout(function() {
             flippedCards[0].flip();
             flippedCards[1].flip();
-          }, 2000)
+          }, 1500)
         }
       } else if (flippedCards.length === 0) {
         card.flip();
