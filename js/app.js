@@ -300,11 +300,14 @@ function checkEndGame () {
 
 function doesUsernameExist(username) {
   const storedUsers = JSON.parse(localStorage.getItem('users'));
-  
-  for (const user of storedUsers) {
-    if (user.username === username) {
-      return true; // Username exists in the stored data
+  try {
+    for (const user of storedUsers) {
+      if (user.username === username) {
+        return true; // Username exists in the stored data
+      }
     }
+  } catch {
+    return false;
   }
   return false; // Username does not exist in the stored data
 }
