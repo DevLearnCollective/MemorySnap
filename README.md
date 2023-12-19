@@ -20,6 +20,10 @@ A memory game of finding matching pairs of cards.
 
 ![Domain Model](/img/Domain%20Model.png)
 
+## Lighthouse Report
+
+![Lighthouse Report](/img/Lighthouse%20Report%202023-12-19%20Memory%20Snap.png)
+
 ## Attributes
 
 <a href="https://www.freepik.com/free-vector/sticker-set-mixed-daily-objects_26348429.htm#query=kids%20objects&position=38&from_view=keyword&track=ais&uuid=8857bc91-1f15-4738-a63d-ee12759191ab">Image by brgfx</a> on Freepik
