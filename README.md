@@ -22,7 +22,7 @@ A memory game of finding matching pairs of cards.
 
 ## Lighthouse Report
 
-![Lighthouse Report](/img/Lighthouse Report 2023-12-19 Memory Snap.png)
+![Lighthouse Report](/img/Lighthouse%20Report%202023-12-19%20Memory%20Snap.png?raw=true))
 
 ## Attributes
 
